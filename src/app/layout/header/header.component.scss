@@ -1,0 +1,24 @@
+header.site-header {
+    background-color: var(--brand-color);
+    padding: 10px 1rem;
+    text-align: center;
+    color: var(--secondary-text-color);
+
+    .brand-route {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .nav {
+        a {
+            color: #d8d8d8;
+            transition: none;
+
+            &:hover,
+            &.active {
+                color: var(--secondary-text-color);
+                text-decoration: underline;
+            }
+        }
+    }
+}
