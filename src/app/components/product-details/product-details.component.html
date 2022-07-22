@@ -1,0 +1,27 @@
+<div class="row align-items-center mt-5" *ngIf="product">
+    <div class="col-md-5 col-sm-12">
+        <div class="product-img">
+            <img [src]="product.url" [alt]="product.name">
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-12">
+        <div class="product-info">
+            <h1>{{product.name}}</h1>
+            <strong>${{product.price}}</strong>
+            <p>{{product.description}}</p>
+            <button class="btn btn-primary">Add To Cart</button>
+        </div>
+        <div class="w-50 mt-3">
+            <select class="form-select" [(ngModel)]="qty">
+                <option [value]="i" *ngFor="let i of qtyOptions">{{i}}</option>
+            </select>
+        </div>
+
+        <a routerLink="/products" class="text-primary d-block mt-3">
+            <svg width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back To Product List
+        </a>
+    </div>
+</div>

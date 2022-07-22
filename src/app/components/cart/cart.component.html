@@ -1,1 +1,65 @@
-<p>cart works!</p>
+<div class="my-5">
+    <p class="lead">
+        You have
+        <strong class="text-danger fw-bold">{{cartProducts.length}}</strong>
+        item in your cart
+    </p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-5" *ngFor="let item of cartProducts; let i = index">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="cart-img">
+                            <img [src]="item.item.url" [alt]="item.item.name" class="img-thumbnail">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <h4>{{item.item.name}}</h4>
+
+                        <strong class="mt-3">
+                            ${{item.item.price * item.quantity}}
+                        </strong>
+
+                        <div class="quantity d-flex justify-content-between mt-3">
+                            <input class="form-control w-50" type="number" (change)="detectChange()"
+                                [(ngModel)]="item.quantity" min="1">
+                        </div>
+
+
+                        <button class="btn btn-danger mt-3" (click)="deleteProduct(i)">Delete</button>
+                    </div>
+                    <!-- /.col-6 -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+        </div>
+        <!-- /.col-md-6 -->
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label class="fw-bold d-block mb-2">Full Name</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold d-block mb-2">Address</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold d-block mb-2">Credit Card Number</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <!-- /.col-md-6 -->
+    </div>
+    <!-- /.row -->
+
+    <p class="lead">Total : <strong class="fw-bold">${{total}}</strong></p>
+
+    <div class="alert alert-success" role="alert" *ngIf="success">
+        <strong>Well done!</strong> Your Order is Successfully Send
+    </div>
+</div>

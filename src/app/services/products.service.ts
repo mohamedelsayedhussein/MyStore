@@ -12,5 +12,4 @@ export class ProductsService {
   getProductList() {
     return this.http.get<Product[]>('/assets/data.json');
   }
-
 }

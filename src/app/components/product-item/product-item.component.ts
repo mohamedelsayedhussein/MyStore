@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../models/product';
 
 @Component({
@@ -8,13 +8,20 @@ import { Product } from '../../models/product';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: Product;
-  numbers: number[];
+  @Output() item = new EventEmitter();
+  
+  qty: number = 1;
+  qtyOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor() {
-    this.numbers = Array(10).fill(0).map((_x, i) => i + 1);
+    this.qtyOptions = Array(10).fill(0).map((_x, i) => i + 1);
   }
 
   ngOnInit(): void {
+  }
+
+  addToCart() {
+    this.item.emit({ item: this.product, quantity: this.qty })
   }
 
 }

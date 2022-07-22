@@ -1,5 +1,5 @@
 <div class="row mt-5">
     <div class="col-md-4" *ngFor="let product of products">
-        <app-product-item [product]="product"></app-product-item>
+        <app-product-item [product]="product" (item)="addToCart($event)"></app-product-item>
     </div>
 </div>
