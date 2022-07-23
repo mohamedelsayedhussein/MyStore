@@ -8,7 +8,7 @@
                 {{product.name}}
             </a>
         </h4>
-        <strong class="d-block mb-2">${{product.price}}</strong>
+        <strong class="d-block mb-2">{{product.price | currency}}</strong>
         <div class="w-50 m-auto">
             <select class="form-select" [(ngModel)]="qty">
                 <option [value]="i" *ngFor="let i of qtyOptions">{{i}}</option>

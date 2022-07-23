@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../models/cart';
 
 @Component({
   selector: 'app-cart',
@@ -7,16 +11,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cartProducts: any[] = [];
-  total: number = 0;
-  success: boolean = false;
+  cartItems$!: Observable<CartItem[]>;
+  confirmation: boolean = false;
+  dur: number = 10;
   form!: FormGroup;
 
-  constructor() { }
+  constructor(private cartService: CartService, private router: Router) {
+    this.cartItems$ = this.cartService.getCartItemsList();
+  }
 
   ngOnInit(): void {
-    this.getCartProducts();
+    this.getCartItems();
+    this.buildForm();
+  }
 
+  buildForm() {
     this.form = new FormGroup({
       fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       address: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -36,32 +45,28 @@ export class CartComponent implements OnInit {
     return this.form.get('creditNumber');
   }
 
-  getCartProducts() {
-    if ("cart" in localStorage) {
-      this.cartProducts = JSON.parse(localStorage.getItem("cart")!);
-    };
-    this.getCartTotal();
+  calcCartTotal() {
+    let cartItems = JSON.parse(localStorage.getItem("cart")!);
+    const total = cartItems.reduce((acc: number, cur: CartItem) => acc + (cur.product.price * cur.quantity), 0);
+    return total;
   }
 
-  getCartTotal() {
-    this.total = 0;
-    for (let x in this.cartProducts) {
-      this.total += this.cartProducts[x].item.price * this.cartProducts[x].quantity;
-    }
+  getCartItems() {
+    this.cartService.getCartItems();
   }
 
-  detectChange() {
-    this.getCartTotal();
-    localStorage.setItem("cart", JSON.stringify(this.cartProducts));
+  updateCart() {
+    this.cartService.updateCart();
   }
 
-  deleteProduct(index: number) {
-    this.cartProducts.splice(index, 1);
-    this.getCartTotal();
-    localStorage.setItem("cart", JSON.stringify(this.cartProducts));
+  deleteProduct(id: number) {
+    this.cartService.deleteProduct(id);
   }
 
   onSubmit() {
-    this.success = true;
+    this.confirmation = true;
+    setTimeout(() => {
+      this.router.navigateByUrl('/products');
+    }, this.dur * 1000)
   }
 }

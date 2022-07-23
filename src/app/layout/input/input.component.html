@@ -10,16 +10,16 @@
         </small>
         <small *ngIf="control.errors?.['minlength']">
             Value you entered is
-            {{ control.errors?.['minlength'].actualLength }}
+            <strong>{{ control.errors?.['minlength'].actualLength }}</strong>
             characters long, but it must be at aleast
-            {{ control.errors?.['minlength'].requiredLength }}
+            <strong>{{ control.errors?.['minlength'].requiredLength }}</strong>
             characters
         </small>
         <small *ngIf="control.errors?.['maxlength']">
             Value you entered is
-            {{ control.errors?.['maxlength'].actualLength }}
+            <strong>{{ control.errors?.['maxlength'].actualLength }}</strong>
             characters long, but it cannot be longer than
-            {{ control.errors?.['maxlength'].requiredLength }}
+            <strong>{{ control.errors?.['maxlength'].requiredLength }}</strong>
             characters
         </small>
         <small *ngIf="control.errors?.['pattern']">
