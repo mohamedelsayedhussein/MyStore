@@ -61,6 +61,9 @@ export class CartComponent implements OnInit {
 
   deleteProduct(id: number) {
     this.cartService.deleteProduct(id);
+    setTimeout(() => {
+      alert("Product deleted");
+    },500)
   }
 
   onSubmit() {

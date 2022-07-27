@@ -19,11 +19,11 @@
                             <h4>{{item.product.name}}</h4>
 
                             <strong class="mt-3">
-                                {{(item.product.price * item.quantity) | currency}}
+                                ${{(item.product.price * item.quantity)}}
                             </strong>
 
                             <div class="mt-3">
-                                <input class="form-control w-50" type="number" (change)="updateCart()"
+                                <input class="form-control w-50" type="number" (ngModelChange)="updateCart()"
                                     [(ngModel)]="item.quantity" min="1">
                             </div>
 
@@ -54,7 +54,7 @@
         </div>
         <!-- /.row -->
 
-        <p class="lead">Total : <strong class="fw-bold">{{calcCartTotal() | currency}}</strong></p>
+        <p class="lead">Total : <strong class="fw-bold">${{calcCartTotal()}}</strong></p>
     </div>
 </div>
 
@@ -74,7 +74,7 @@
                         d="m221.27 305.808l-73.413-73.412l-22.627 22.627l96.04 96.04l167.5-167.499l-22.628-22.627L221.27 305.808z" />
                 </svg>
                 <p>Thank you, <strong>{{fullName?.value}}</strong></p>
-                <p>Your <strong>{{calcCartTotal() | currency}}</strong> order is confirmed!</p>
+                <p>Your <strong>{{calcCartTotal()}}</strong> order is confirmed!</p>
                 <p>You will be redirected to continue shopping within <strong>{{dur}}</strong> seconds</p>
             </div>
         </div>
