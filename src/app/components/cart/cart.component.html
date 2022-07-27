@@ -23,11 +23,12 @@
                             </strong>
 
                             <div class="mt-3">
-                                <input class="form-control w-50" type="number" (ngModelChange)="updateCart()"
-                                    [(ngModel)]="item.quantity" min="1">
+                                <input class="form-control w-50" type="number" [(ngModel)]="item.quantity"
+                                    (ngModelChange)="updateCart()" min="1">
                             </div>
 
-                            <button class="btn btn-danger mt-3" (click)="deleteProduct(item.product.id)">Delete</button>
+                            <button class="btn btn-danger mt-3"
+                                (click)="deleteProduct(item.product.id,item.product.name)">Delete</button>
                         </div>
                         <!-- /.col-6 -->
                     </div>

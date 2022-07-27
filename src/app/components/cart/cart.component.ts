@@ -59,11 +59,11 @@ export class CartComponent implements OnInit {
     this.cartService.updateCart();
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: number, productName: string) {
     this.cartService.deleteProduct(id);
     setTimeout(() => {
-      alert("Product deleted");
-    },500)
+      alert(`Product ${productName} is deleted`);
+    }, 500)
   }
 
   onSubmit() {
